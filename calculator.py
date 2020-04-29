@@ -29,14 +29,14 @@ def translate(tokens):
     else:
         return "Please enter a valid operator."
 
-def validate(tokens):
-    if token[0] not in ["+", "-", "*", "/", "square", "cube", "pow", "mod", "x+", "cubes+"]:
+def isValid(tokens):
+    if tokens[0] not in ["+", "-", "*", "/", "square", "cube", "pow", "mod", "x+", "cubes+"]:
         print("Please enter a valid operator.")
-    elif token[0] in ["+", "-", "*", "/", "pow", "mod", "cubes+"] and len(tokens) =! 3:
-        print(f"The {token[0]} operator requires two operands.")
-    elif token[0] in ["square", "cube"] and len(tokens) =! 2:
-        print(f"The {token[0]} operator takes exactly one operand.")
-    elif token[0]=="x+" and len(tokens) =! 4:
+    elif tokens[0] in ["+", "-", "*", "/", "pow", "mod", "cubes+"] and len(tokens) != 3:
+        print(f"The {tokens[0]} operator requires two operands.")
+    elif tokens[0] in ["square", "cube"] and len(tokens) != 2:
+        print(f"The {tokens[0]} operator takes exactly one operand.")
+    elif tokens[0]=="x+" and len(tokens) != 4:
         print("The x+ operator requires three operands.")
     else:
         return True
@@ -44,13 +44,10 @@ def validate(tokens):
 
 while True:
     equation = input("Enter your equation > ")
-    tokens = equation.split(" ")
-    if not isValid(tokens):
-        continue
     if equation == "q" or equation == "quit":
         break
-    if len(tokens) < 3:
-        print("Not enough inputs.")
+    tokens = equation.split(" ")
+    if not isValid(tokens):
         continue
     print(translate(tokens))
 
