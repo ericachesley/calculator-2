@@ -32,6 +32,8 @@ def translate(tokens):
 def isValid(tokens):
     if tokens[0] not in ["+", "-", "*", "/", "square", "cube", "pow", "mod", "x+", "cubes+"]:
         print("Please enter a valid operator.")
+    elif not floatify(tokens):
+        print("Your operands are not all numbers. Please try again.")
     elif tokens[0] in ["+", "-", "*", "/", "pow", "mod", "cubes+"] and len(tokens) != 3:
         print(f"The {tokens[0]} operator requires two operands.")
     elif tokens[0] in ["square", "cube"] and len(tokens) != 2:
@@ -41,6 +43,14 @@ def isValid(tokens):
     else:
         return True
     return False
+
+def floatify(tokens):
+    for token in tokens[1:]:
+        try:
+            token = float(token)
+        except ValueError:
+            return False
+    return True
 
 while True:
     equation = input("Enter your equation > ")
